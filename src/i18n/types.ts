@@ -195,5 +195,7 @@ export interface Dictionary {
     builtWith: string
     rights: (year: number) => string
     backToTop: string
+    imprint: string
+    privacy: string
   }
 }

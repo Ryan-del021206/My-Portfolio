@@ -6,6 +6,7 @@ import { Footer } from './components/Footer/Footer'
 import { Header } from './components/Header/Header'
 import { Hero } from './components/Hero/Hero'
 import { LanguageHint } from './components/LanguageHint/LanguageHint'
+import { Legal } from './components/Legal/Legal'
 import { MonoDemo } from './components/MonoDemo/MonoDemo'
 import { Marquee } from './components/Marquee/Marquee'
 import { MonoShowcase } from './components/Mono/MonoShowcase'
@@ -48,7 +49,7 @@ function Page() {
 export function App({ initialLocale, page = 'home' }: { initialLocale: Locale; page?: PageId }) {
   return (
     <I18nProvider initialLocale={initialLocale} page={page}>
-      {page === 'mono' ? <MonoDemo /> : <Page />}
+      {page === 'mono' ? <MonoDemo /> : page === 'home' ? <Page /> : <Legal kind={page} />}
     </I18nProvider>
   )
 }

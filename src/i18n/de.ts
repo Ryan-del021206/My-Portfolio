@@ -377,5 +377,7 @@ export const de: Dictionary = {
     builtWith: 'Gebaut mit React, TypeScript, three.js und Vite.',
     rights: (year) => `© ${year} Ryan`,
     backToTop: 'Nach oben',
+    imprint: 'Impressum',
+    privacy: 'Datenschutz',
   },
 }

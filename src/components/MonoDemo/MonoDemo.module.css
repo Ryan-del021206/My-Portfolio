@@ -230,3 +230,27 @@
     border-top: 1px solid var(--line);
   }
 }
+
+/* Legal links under the page */
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  padding-block: var(--space-5) var(--space-7);
+  border-top: 1px solid var(--line);
+  font-size: var(--text-sm);
+}
+
+.legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .legal a:hover {
+    color: var(--accent);
+  }
+}

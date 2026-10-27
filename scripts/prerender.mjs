@@ -18,16 +18,30 @@ const siteUrl = (process.env.SITE_URL ?? '').replace(/\/+$/, '')
 const { render, dictionaries, locales } = await import(pathToFileURL(resolve(ssrDir, 'entry-server.js')).href)
 const template = await readFile(resolve(dist, 'index.html'), 'utf8')
 
-const pages = ['home', 'mono']
-const pathFor = (locale, page = 'home') => (locale === 'en' ? '/en/' : '/') + (page === 'mono' ? 'mono-demo/' : '')
+// Legal pages exist in German only (German law requires them; the English site links to them).
+const pages = ['home', 'mono', 'imprint', 'privacy']
+const localesOf = (page) => (page === 'imprint' || page === 'privacy' ? ['de'] : locales)
+const legalTitles = {
+  imprint: ['Impressum — Ryan', 'Impressum der persönlichen Website von Ryan Ruppert.'],
+  privacy: ['Datenschutzerklärung — Ryan', 'Datenschutzerklärung der persönlichen Website von Ryan Ruppert.'],
+}
+const pathFor = (locale, page = 'home') => {
+  if (page === 'imprint') return '/impressum/'
+  if (page === 'privacy') return '/datenschutz/'
+  return (locale === 'en' ? '/en/' : '/') + (page === 'mono' ? 'mono-demo/' : '')
+}
 const escape = (value) =>
   String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
 const absolute = (path) => (siteUrl ? siteUrl + path : path)
 
 function head(locale, page) {
   const t = dictionaries[locale]
-  const title = page === 'mono' ? t.monoDemo.metaTitle : t.meta.title
-  const description = page === 'mono' ? t.monoDemo.metaDescription : t.meta.description
+  const [title, description] =
+    page === 'mono'
+      ? [t.monoDemo.metaTitle, t.monoDemo.metaDescription]
+      : page === 'home'
+        ? [t.meta.title, t.meta.description]
+        : legalTitles[page]
   const alternate = locales.find((l) => l !== locale)
   const image = absolute(`/og-${locale}.png`)
   const person = {
@@ -60,8 +74,12 @@ function head(locale, page) {
     tags.push(
       `<link rel="canonical" href="${siteUrl}${pathFor(locale, page)}" />`,
       `<meta property="og:url" content="${siteUrl}${pathFor(locale, page)}" />`,
-      ...locales.map((l) => `<link rel="alternate" hreflang="${l}" href="${siteUrl}${pathFor(l, page)}" />`),
-      `<link rel="alternate" hreflang="x-default" href="${siteUrl}${pathFor('de', page)}" />`,
+      ...(localesOf(page).length > 1
+        ? [
+            ...locales.map((l) => `<link rel="alternate" hreflang="${l}" href="${siteUrl}${pathFor(l, page)}" />`),
+            `<link rel="alternate" hreflang="x-default" href="${siteUrl}${pathFor('de', page)}" />`,
+          ]
+        : []),
     )
   }
   tags.push(`<script type="application/ld+json">${JSON.stringify(person).replace(/</g, '\\u003c')}</script>`)
@@ -69,7 +87,7 @@ function head(locale, page) {
 }
 
 for (const page of pages) {
-  for (const locale of locales) {
+  for (const locale of localesOf(page)) {
     const html = template
       .replace('<html lang="de">', `<html lang="${locale}">`)
       .replace(/<!--head:start-->[\s\S]*?<!--head:end-->/, head(locale, page))
@@ -85,7 +103,7 @@ const robots = ['User-agent: *', 'Allow: /', ...(siteUrl ? ['', `Sitemap: ${site
 await writeFile(resolve(dist, 'robots.txt'), robots + '\n')
 
 if (siteUrl) {
-  const urls = pages
+  const urls = ['home', 'mono']
     .flatMap((page) =>
       locales.map((locale) => {
         const links = locales

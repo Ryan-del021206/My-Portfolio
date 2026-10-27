@@ -100,3 +100,22 @@
     margin-left: 0;
   }
 }
+
+.legal {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .legal a:hover {
+    color: var(--ink);
+  }
+}

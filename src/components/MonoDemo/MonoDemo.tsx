@@ -1,4 +1,5 @@
 import { ArrowLeft, ArrowUpRight, Mail } from 'lucide-react'
+import { legalPaths } from '../../content/legal'
 import { site } from '../../content/site'
 import { demoPath, otherLocale, pathForLocale } from '../../i18n/locale'
 import { useI18n } from '../../i18n/useI18n'
@@ -93,6 +94,10 @@ export function MonoDemo() {
           </div>
         </section>
       </main>
+      <footer className={`container ${styles.legal}`}>
+        <a href={legalPaths.imprint}>{t.footer.imprint}</a>
+        <a href={legalPaths.privacy}>{t.footer.privacy}</a>
+      </footer>
     </>
   )
 }

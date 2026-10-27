@@ -1,4 +1,5 @@
 import { ArrowUp } from 'lucide-react'
+import { legalPaths } from '../../content/legal'
 import { site } from '../../content/site'
 import { useI18n } from '../../i18n/useI18n'
 import { navSections } from '../Header/sections'
@@ -39,6 +40,10 @@ export function Footer() {
         <div className={styles.bottom}>
           <p suppressHydrationWarning>{t.footer.rights(year)}</p>
           <p>{t.footer.builtWith}</p>
+          <p className={styles.legal}>
+            <a href={legalPaths.imprint}>{t.footer.imprint}</a>
+            <a href={legalPaths.privacy}>{t.footer.privacy}</a>
+          </p>
           <div className={styles.bottomActions}>
             <LanguageSwitch />
             <a href="#top" className={styles.top}>

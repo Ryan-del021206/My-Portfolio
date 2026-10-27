@@ -23,11 +23,14 @@ export function demoPath(locale: Locale): string {
   return locale === 'en' ? '/en/mono-demo/' : '/mono-demo/'
 }
 
-/** Which page a path shows: the portfolio or the MONO demo. */
-export type PageId = 'home' | 'mono'
+/** Which page a path shows: the portfolio, the MONO demo or a legal page (German only). */
+export type PageId = 'home' | 'mono' | 'imprint' | 'privacy'
 
 export function pageFromPath(pathname: string): PageId {
-  return /\/mono-demo(\/|$)/.test(pathname) ? 'mono' : 'home'
+  if (/\/mono-demo(\/|$)/.test(pathname)) return 'mono'
+  if (/^\/impressum(\/|$)/.test(pathname)) return 'imprint'
+  if (/^\/datenschutz(\/|$)/.test(pathname)) return 'privacy'
+  return 'home'
 }
 
 export function otherLocale(locale: Locale): Locale {

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { flushSync } from 'react-dom'
+import { legalMeta } from '../content/legal'
 import { withViewTransition } from '../hooks/viewTransition'
 import { dictionaries, localeFromPath, pathForLocale, storeLocale, type PageId } from './locale'
 import type { Locale } from './types'
@@ -8,10 +9,14 @@ import { I18nContext } from './useI18n'
 function syncDocument(locale: Locale, page: PageId) {
   const t = dictionaries[locale]
   document.documentElement.lang = locale
-  document.title = page === 'mono' ? t.monoDemo.metaTitle : t.meta.title
-  document
-    .querySelector('meta[name="description"]')
-    ?.setAttribute('content', page === 'mono' ? t.monoDemo.metaDescription : t.meta.description)
+  const meta =
+    page === 'mono'
+      ? { title: t.monoDemo.metaTitle, description: t.monoDemo.metaDescription }
+      : page === 'home'
+        ? t.meta
+        : legalMeta[page]
+  document.title = meta.title
+  document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description)
   document.querySelector('meta[property="og:locale"]')?.setAttribute('content', t.meta.ogLocale)
 }
 
