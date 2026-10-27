@@ -147,6 +147,11 @@ export interface Dictionary {
     certEarned: string
     certVerify: string
     certAlt: (name: string) => string
+    certOpen: (name: string) => string
+    certClose: string
+    certPrev: string
+    certNext: string
+    certCount: (n: number, total: number) => string
     certBadge: string
   }
   process: {
@@ -173,6 +178,7 @@ export interface Dictionary {
     copied: string
     copyFailed: string
     instagramLabel: string
+    phoneLabel: string
     otherHeading: string
     checklistHeading: string
     checklist: string[]

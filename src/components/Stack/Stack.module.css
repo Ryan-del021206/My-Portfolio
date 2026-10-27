@@ -366,12 +366,28 @@
   box-shadow: var(--shadow-float);
 }
 
+/* The whole picture is the button that opens the full-size view. */
+.certButton {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-2);
+  background: none;
+  cursor: zoom-in;
+}
+
+.certButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 @media (prefers-reduced-motion: no-preference) and (hover: hover) {
   .certImage {
     transition: transform var(--dur-hover) var(--ease-out);
   }
 
-  .cert:hover .certImage {
+  .certButton:hover .certImage {
     transform: translateY(-4px);
   }
 }

@@ -5,10 +5,11 @@
 export const site = {
   name: 'Ryan',
   email: 'ryanxruppert@gmail.com',
+  phone: { display: '0179 1667287', href: 'tel:+491791667287' },
   instagram: {
     handle: 'q0entin.ryan',
-    // OPEN: set to true once the profile is confirmed, then the handle becomes a link.
-    verified: false,
+    // Confirmed by Ryan on 27.10.2026, so the handle is a link.
+    verified: true,
   },
   location: 'Soest',
   timeZone: 'Europe/Berlin',

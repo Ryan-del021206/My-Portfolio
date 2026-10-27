@@ -54,7 +54,7 @@ describe('dictionaries', () => {
       '.projects.names.omikron', '.stack.certIssuer',
       '.nav.stack', '.projects.items.omikron.name', '.projects.items.portfolio.kind', '.projects.fitnessModules[0]',
       '.projects.linksLabel', '.stack.groups.frontend', '.stack.groups.mobile', '.stack.groups.design', '.about.facts[0].label',
-      '.about.facts[0].value', '.about.facts[1].value', '.contact.instagramLabel', '.a11y.menuTitle', '.hero.facts[3].label',
+      '.about.facts[0].value', '.about.facts[1].value', '.contact.instagramLabel', '.terminal.output.contact[2]', '.a11y.menuTitle', '.hero.facts[3].label',
     ])
     const enStrings = new Map(strings(en))
     const same = strings(de)

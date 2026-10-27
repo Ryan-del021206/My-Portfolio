@@ -42,18 +42,18 @@ describe('pre-rendered page', () => {
     }
   })
 
-  it('contact uses a real mailto link and no fake Instagram URL while unverified', () => {
+  it('contact links email, phone and the confirmed Instagram profile', () => {
     const root = page('de')
     expect(root.querySelector('a[href^="mailto:ryanxruppert@gmail.com"]')).not.toBeNull()
-    expect(root.querySelector('a[href*="instagram.com"]')).toBeNull()
-    expect(root.textContent).toContain('@q0entin.ryan')
+    expect(root.querySelector('a[href="tel:+491791667287"]')).not.toBeNull()
+    expect(root.querySelector('a[href="https://www.instagram.com/q0entin.ryan/"]')).not.toBeNull()
   })
 
   it('has no dead links', () => {
     const root = page('de')
     for (const a of root.querySelectorAll('a')) {
       const href = a.getAttribute('href')
-      expect(href, a.outerHTML.slice(0, 80)).toMatch(/^(#.+|\/|\/en\/|mailto:|https:\/\/)/)
+      expect(href, a.outerHTML.slice(0, 80)).toMatch(/^(#.+|\/|\/en\/|mailto:|tel:\+49\d+$|https:\/\/)/)
     }
   })
 })

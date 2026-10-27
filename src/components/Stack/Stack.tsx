@@ -5,6 +5,7 @@ import { projectAnchor } from '../../content/projects'
 import { allTech, groupOf, stack, type Tech } from '../../content/stack'
 import { useI18n } from '../../i18n/useI18n'
 import styles from './Stack.module.css'
+import { CertificateLightbox } from './CertificateLightbox'
 import { StackGlobe } from './StackGlobe'
 
 export function Stack() {
@@ -13,6 +14,8 @@ export function Stack() {
   const selected = allTech.find((tech) => tech.id === selectedId) ?? allTech[0]!
   const nameOf = (tech: Tech) => t.stack.techNames[tech.id] ?? tech.name
   const certificate = certificateFor(selected.id)
+  const [viewIndex, setViewIndex] = useState<number | null>(null)
+  const closeViewer = () => setViewIndex(null)
 
   return (
     <section id="stack" className={`section ${styles.stack}`} aria-labelledby="stack-title">
@@ -107,17 +110,24 @@ export function Stack() {
           <h3 className={styles.certsHeading}>{t.stack.certsHeading}</h3>
           <p className={styles.certsIntro}>{t.stack.certsIntro}</p>
           <ul className={styles.certList}>
-            {certificateImages.map((cert) => (
+            {certificateImages.map((cert, i) => (
               <li key={cert.id}>
                 <figure className={styles.cert}>
-                  <img
+                  <button
+                    type="button"
+                    className={styles.certButton}
+                    onClick={() => setViewIndex(i)}
+                    aria-label={t.stack.certOpen(cert.name)}
+                  >
+                    <img
                     className={styles.certImage}
                     src={cert.image}
                     alt={t.stack.certAlt(cert.name)}
                     width={1200}
                     height={914}
                     decoding="async"
-                  />
+                    />
+                  </button>
                   <figcaption className={styles.certCaption}>
                     <BadgeCheck size={16} aria-hidden="true" />
                     {cert.name} · {t.stack.certIssuer}
@@ -128,6 +138,19 @@ export function Stack() {
           </ul>
         </div>
       </div>
+      <CertificateLightbox
+        items={certificateImages}
+        index={viewIndex}
+        onIndex={setViewIndex}
+        onClose={closeViewer}
+        labels={{
+          close: t.stack.certClose,
+          prev: t.stack.certPrev,
+          next: t.stack.certNext,
+          alt: t.stack.certAlt,
+          count: t.stack.certCount,
+        }}
+      />
     </section>
   )
 }

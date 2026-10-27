@@ -1,8 +1,9 @@
-import { ArrowUpRight, Check, Copy, Mail } from 'lucide-react'
+import { ArrowUpRight, Check, Copy, Mail, Phone } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { instagramUrl, site } from '../../content/site'
 import { useI18n } from '../../i18n/useI18n'
 import buttons from '../ui/buttons.module.css'
+import { InstagramIcon } from '../ui/InstagramIcon'
 import styles from './Contact.module.css'
 
 type CopyState = 'idle' | 'copied' | 'failed'
@@ -68,17 +69,33 @@ export function Contact() {
           </ul>
 
           <h3 className={styles.subheading}>{t.contact.otherHeading}</h3>
-          <p className={styles.social}>
-            <span className={styles.socialLabel}>{t.contact.instagramLabel}</span>
-            {site.instagram.verified ? (
-              <a href={instagramUrl} className={styles.socialLink} target="_blank" rel="noreferrer">
-                @{site.instagram.handle}
-                <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
+          <ul className={styles.channels}>
+            <li>
+              <a href={site.phone.href} className={styles.channel}>
+                <span className={styles.channelIcon}>
+                  <Phone size={20} strokeWidth={2} aria-hidden="true" />
+                </span>
+                <span className={styles.channelText}>
+                  <span className={styles.channelLabel}>{t.contact.phoneLabel}</span>
+                  {site.phone.display}
+                </span>
               </a>
-            ) : (
-              <span>@{site.instagram.handle}</span>
+            </li>
+            {site.instagram.verified && (
+              <li>
+                <a href={instagramUrl} className={styles.channel} target="_blank" rel="noreferrer">
+                  <span className={styles.channelIcon}>
+                    <InstagramIcon size={20} />
+                  </span>
+                  <span className={styles.channelText}>
+                    <span className={styles.channelLabel}>{t.contact.instagramLabel}</span>
+                    @{site.instagram.handle}
+                  </span>
+                  <ArrowUpRight className={styles.channelArrow} size={16} strokeWidth={2} aria-hidden="true" />
+                </a>
+              </li>
             )}
-          </p>
+          </ul>
         </div>
       </div>
     </section>
