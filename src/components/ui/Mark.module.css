@@ -1,0 +1,32 @@
+.mark {
+  flex: none;
+  overflow: visible;
+}
+
+.line1 {
+  fill: var(--amber);
+}
+
+.line2 {
+  fill: var(--mark);
+}
+
+.line3 {
+  fill: var(--accent);
+}
+
+.cursor {
+  fill: var(--ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cursor {
+    animation: blink 1.1s steps(1) infinite;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

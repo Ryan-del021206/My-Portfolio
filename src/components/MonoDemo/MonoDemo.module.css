@@ -1,0 +1,232 @@
+/* Top bar: back to the portfolio, language switch */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--line);
+  background: rgb(8 8 10 / 0.82);
+  backdrop-filter: blur(12px);
+}
+
+.barInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--header-h);
+}
+
+.back,
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back {
+  color: var(--ink);
+}
+
+.lang {
+  padding: 0 var(--space-3);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+@media (hover: hover) {
+  .back:hover {
+    color: var(--accent);
+  }
+
+  .lang:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+}
+
+.page {
+  padding-block: clamp(40px, 6vw, 88px) var(--space-section);
+}
+
+/* Demo: copy left, phone right */
+.demo {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: center;
+}
+
+.eyebrow {
+  color: var(--amber);
+  font-weight: 650;
+}
+
+.heading {
+  margin-top: var(--space-3);
+  font-size: var(--text-h2);
+  font-stretch: 108%;
+  line-height: 1;
+  letter-spacing: -0.032em;
+}
+
+.intro {
+  max-width: 34rem;
+  margin-top: var(--space-5);
+  color: var(--ink-soft);
+  font-size: var(--text-lead);
+}
+
+.subheading {
+  margin-top: var(--space-7);
+  font-size: var(--text-h3);
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 34rem;
+  margin-top: var(--space-4);
+  padding-left: 1.4em;
+  color: var(--ink-soft);
+}
+
+.steps li::marker {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.privacy {
+  max-width: 34rem;
+  margin-block: var(--space-5) var(--space-5);
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+/* Phone frame around the live app (390 × 844 like an iPhone) */
+.phone {
+  justify-self: center;
+  width: min(100%, 390px, calc((100dvh - var(--header-h) - 64px) * 390 / 844));
+  min-width: min(100%, 300px);
+  aspect-ratio: 390 / 844;
+  padding: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 48px;
+  background: #000;
+  box-shadow:
+    var(--shadow-float),
+    0 0 0 6px var(--surface),
+    0 0 80px -20px var(--accent-glow);
+}
+
+.screen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 36px;
+  background: #000;
+}
+
+/* About Ryan */
+.about {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-7);
+  align-items: start;
+  margin-top: var(--space-section);
+  padding-top: var(--space-section);
+  border-top: 1px solid var(--line);
+}
+
+.avatar {
+  width: clamp(96px, 12vw, 160px);
+  height: auto;
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  background: #1aa3ff;
+}
+
+.aboutCopy {
+  max-width: 46rem;
+}
+
+.aboutHeading {
+  margin-top: var(--space-3);
+  font-size: var(--text-h2);
+  font-stretch: 108%;
+  line-height: 1;
+  letter-spacing: -0.032em;
+}
+
+.paragraph {
+  margin-top: var(--space-5);
+  color: var(--ink-soft);
+  font-size: var(--text-lead);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: var(--space-7);
+  border-block: 1px solid var(--line-strong);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-1);
+  padding: var(--space-5) var(--space-4);
+}
+
+.fact + .fact {
+  border-left: 1px solid var(--line);
+}
+
+.fact dt {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.fact dd {
+  font-size: 1.125rem;
+  font-weight: 650;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+  margin-top: var(--space-7);
+}
+
+@media (max-width: 860px) {
+  .demo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .phone {
+    width: min(100%, 390px);
+  }
+
+  .about {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fact:nth-child(3) {
+    border-left: 0;
+  }
+
+  .fact:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+}

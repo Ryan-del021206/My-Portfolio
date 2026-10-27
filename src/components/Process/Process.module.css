@@ -1,0 +1,169 @@
+.process {
+  border-top: 1px solid var(--line);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: var(--space-5) var(--space-8);
+  align-items: start;
+  margin-bottom: clamp(40px, 6vw, 80px);
+}
+
+.heading {
+  max-width: 14ch;
+  font-size: var(--text-h2);
+  font-stretch: 108%;
+  line-height: 1;
+  letter-spacing: -0.032em;
+}
+
+.intro {
+  max-width: 30rem;
+  color: var(--ink-soft);
+  font-size: var(--text-lead);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--space-6);
+}
+
+/* Each step owns one colour of the ramp; the segments fill in order. */
+.segment {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.segment::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--c);
+  transform-origin: left;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .steps {
+      view-timeline: --steps block;
+    }
+
+    .segment::after {
+      animation: segment linear both;
+      animation-timeline: --steps;
+      animation-range: entry calc(30% + var(--i) * 12%) entry calc(52% + var(--i) * 12%);
+    }
+  }
+}
+
+@keyframes segment {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.number {
+  color: var(--c);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.title {
+  margin-top: var(--space-3);
+  font-size: var(--text-h3);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  hyphens: auto;
+}
+
+.text {
+  margin-top: var(--space-3);
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.result {
+  display: grid;
+  gap: 2px;
+  margin-top: auto;
+  padding-top: var(--space-5);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.resultLabel {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 560;
+}
+
+@media (max-width: 1180px) {
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: var(--space-7);
+  }
+}
+
+@media (max-width: 860px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 580px) {
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+
+  .step {
+    padding-top: 0;
+    padding-left: var(--space-5);
+  }
+
+  .segment {
+    top: 0;
+    bottom: 0;
+    right: auto;
+    width: 4px;
+    height: auto;
+  }
+
+  .segment::after {
+    transform-origin: top;
+  }
+
+  @keyframes segment {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  .result {
+    margin-top: var(--space-1);
+  }
+}

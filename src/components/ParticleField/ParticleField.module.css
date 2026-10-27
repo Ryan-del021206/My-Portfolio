@@ -1,0 +1,30 @@
+/* Spans the whole page and clips the canvas, so moving it never adds scroll height. */
+.track {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* One screen tall; moved to the current scroll position every frame (see ParticleField.tsx). */
+.field {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 1200ms var(--ease-out);
+}
+
+.field[data-ready] {
+  opacity: 1;
+}
+
+.field canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,37 @@
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms var(--ease-out);
+}
+
+.ring[data-visible] {
+  opacity: 1;
+}
+
+.ring span {
+  position: absolute;
+  top: -16px;
+  left: -16px;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  transition:
+    transform 260ms var(--ease-out),
+    background-color 260ms var(--ease-out),
+    border-color 260ms var(--ease-out);
+}
+
+.ring[data-hot] span {
+  transform: scale(1.75);
+  border-color: var(--amber);
+  background: rgb(var(--accent-rgb) / 0.1);
+}
+
+.ring[data-down] span {
+  transform: scale(0.8);
+}

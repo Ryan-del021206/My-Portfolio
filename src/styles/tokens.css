@@ -1,0 +1,117 @@
+/*
+  Design tokens – "Blue": dark only.
+  Near-black like MONO's black-and-white UI, one glowing accent (blue) with
+  ice blue as its light highlight. All text colours pass WCAG AA on --page:
+  ink ~17:1, ink-soft ~9:1, muted ~5.5:1, accent 7.4:1, ice (--amber) 12.4:1.
+  The highlight keeps its old token name --amber so no component had to change.
+*/
+
+@property --lens-r {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0px;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --page: #08080a;
+  --surface: #111114;
+  --raised: #1a1a1e;
+  --line: rgb(225 235 255 / 0.08);
+  --line-strong: rgb(225 235 255 / 0.16);
+  --grid-dot: rgb(190 215 255 / 0.06);
+
+  /* Text */
+  --ink: #eef2f8;
+  --ink-soft: #b0b8c4;
+  --muted: #858d99;
+
+  /* Accent. The *-rgb channels feed translucent tints and the particle colours. */
+  --accent: #4d9fff;
+  --amber: #9fd0ff;
+  --accent-rgb: 77 159 255;
+  --amber-rgb: 159 208 255;
+  --accent-soft: rgb(var(--accent-rgb) / 0.12);
+  --accent-glow: rgb(var(--accent-rgb) / 0.35);
+  --on-accent: #08080a;
+  --on-ink: #08080a;
+  --code-tag: #8fc2ff;
+  --mark: #6fb2ff;
+
+  /* Process steps: ice -> blue */
+  --step-1: #9fd0ff;
+  --step-2: #87c1ff;
+  --step-3: #70b3ff;
+  --step-4: #5ea9ff;
+  --step-5: #4d9fff;
+
+  --shadow-float: 0 1px 2px rgb(0 0 0 / 0.4), 0 18px 40px -12px rgb(0 0 0 / 0.7);
+
+  /* Type */
+  --font-sans: 'Mona Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Martian Mono Variable', ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.35vw, 1.1875rem);
+  --text-h3: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --text-h2: clamp(2.3rem, 1.4rem + 3.6vw, 4.4rem);
+  --text-display: clamp(3.2rem, 1.2rem + 8.4vw, 9.25rem);
+
+  /* Space */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-section: clamp(80px, 8vw, 124px);
+  --gutter: 44px;
+  --content-max: 1440px;
+  --header-h: 72px;
+  --anchor-gap: calc(var(--header-h) + 32px);
+
+  /* Radius */
+  --radius-1: 4px;
+  --radius-2: 8px;
+  --radius-3: 12px;
+  --radius-4: 16px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --dur-press: 90ms;
+  --dur-hover: 200ms;
+  --dur-enter: 240ms;
+  --dur-exit: 150ms;
+  --dur-reveal: 600ms;
+}
+
+@media (max-width: 860px) {
+  :root {
+    --gutter: 20px;
+    --header-h: 64px;
+    --anchor-gap: calc(var(--header-h) + 24px);
+  }
+}
+
+@media (max-width: 580px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --gutter: 12px;
+  }
+}
+
+@media (min-width: 1800px) {
+  :root {
+    --content-max: 1560px;
+  }
+}

@@ -1,0 +1,236 @@
+/*
+  The lens is a clip-path circle on a code layer that sits above the hero.
+  --lens-x / --lens-y and the data-lens-* states are set by JS on the hero;
+  --lens-r is a registered property (tokens.css), so its size transitions in CSS.
+*/
+.layer {
+  --lens-r: 0px;
+  position: absolute;
+  /* Starts below the (transparent) header; the hero itself runs under it. */
+  inset: var(--header-h) 0 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--surface);
+  clip-path: circle(var(--lens-r) at var(--lens-x, 50%) calc(var(--lens-y, 50%) - var(--header-h)));
+  transition: --lens-r 380ms var(--ease-out);
+}
+
+:global([data-lens-hover]) .layer {
+  --lens-r: 150px;
+}
+
+:global([data-lens-open]) .layer {
+  --lens-r: 150vmax;
+  transition-duration: 760ms;
+}
+
+.code {
+  height: 100%;
+  padding: var(--space-8) var(--gutter) var(--space-6);
+  column-width: 30rem;
+  column-gap: var(--space-7);
+  column-fill: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-stretch: 87.5%;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.file {
+  display: contents;
+}
+
+.fileName {
+  margin-bottom: var(--space-2);
+  color: var(--accent);
+  font-weight: 600;
+  break-after: avoid;
+}
+
+.file + .file .fileName {
+  margin-top: var(--space-5);
+}
+
+.codeLine {
+  display: grid;
+  grid-template-columns: 2.5em 1fr;
+  gap: var(--space-3);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  break-inside: avoid;
+}
+
+.lineNo {
+  color: var(--muted);
+  opacity: 0.6;
+  text-align: right;
+  user-select: none;
+}
+
+.comment {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.string {
+  color: var(--amber);
+}
+
+.keyword {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.tag {
+  color: var(--code-tag);
+}
+
+.number {
+  color: var(--amber);
+}
+
+.punct {
+  color: var(--muted);
+}
+
+.plain {
+  color: var(--ink-soft);
+}
+
+.caption {
+  position: absolute;
+  top: var(--space-5);
+  left: var(--gutter);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-1);
+  background: var(--page);
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity var(--dur-enter) var(--ease-out);
+}
+
+:global([data-lens-open]) .caption {
+  opacity: 1;
+  transition-delay: 300ms;
+}
+
+/* Hairline ring that frames the lens while hovering. */
+.ring {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  margin: -150px 0 0 -150px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  translate: var(--lens-x, 50%) var(--lens-y, 50%);
+  scale: 0;
+  opacity: 0;
+  transition:
+    scale 380ms var(--ease-out),
+    opacity 200ms var(--ease-out);
+}
+
+:global([data-lens-hover]:not([data-lens-open])) .ring {
+  scale: 1;
+  opacity: 0.7;
+}
+
+.control {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  justify-items: end;
+  align-content: end;
+  gap: var(--space-3);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transition:
+    border-color var(--dur-hover) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+.toggle svg {
+  color: var(--accent);
+}
+
+@media (hover: hover) {
+  .toggle:hover {
+    border-color: var(--accent);
+  }
+}
+
+.toggle:active {
+  transform: scale(0.97);
+}
+
+.toggle[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--page);
+}
+
+.toggle[aria-pressed='true'] + .hint {
+  visibility: hidden;
+}
+
+.hint {
+  max-width: 17rem;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-2);
+  background: rgb(8 8 10 / 0.78);
+  backdrop-filter: blur(6px);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  text-align: right;
+}
+
+/* The hint only makes sense with a mouse; touch users get the button. */
+@media not ((hover: hover) and (pointer: fine)) {
+  .hint {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hint {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .control {
+    justify-items: start;
+  }
+
+  .hint {
+    text-align: left;
+  }
+
+  .code {
+    font-size: 0.75rem;
+  }
+}

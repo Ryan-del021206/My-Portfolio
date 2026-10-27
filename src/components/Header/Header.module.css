@@ -1,0 +1,270 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in oklab, var(--page) 92%, transparent);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+}
+
+/* Transparent at the very top, solid as soon as the page scrolls (no JS). */
+@supports (animation-timeline: scroll()) {
+  .header {
+    animation: header-solid linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 80px;
+  }
+}
+
+@keyframes header-solid {
+  from {
+    background: transparent;
+    border-bottom-color: transparent;
+    backdrop-filter: none;
+  }
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  height: var(--header-h);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-right: auto;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.wordmark {
+  font-size: 1.1875rem;
+  font-weight: 720;
+  font-stretch: 112%;
+  letter-spacing: -0.02em;
+}
+
+.links {
+  display: flex;
+  gap: var(--space-1);
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  font-weight: 520;
+  text-decoration: none;
+  transition: color var(--dur-hover) var(--ease-out);
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: 8px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-enter) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .link:hover {
+    color: var(--ink);
+  }
+}
+
+.link[data-active] {
+  color: var(--ink);
+}
+
+.link[data-active]::after {
+  transform: scaleX(1);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.menuButton {
+  display: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+}
+
+/* Reading progress in the five ramp colours. */
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--amber), var(--accent));
+  transform-origin: left;
+  transform: scaleX(0);
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .progress {
+      display: block;
+      animation: progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+@keyframes progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Mobile menu */
+.menu {
+  width: 100%;
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--page);
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(-12px);
+  transition:
+    opacity var(--dur-exit) var(--ease-in),
+    transform var(--dur-exit) var(--ease-in),
+    overlay var(--dur-exit) allow-discrete,
+    display var(--dur-exit) allow-discrete;
+}
+
+.menu[open] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-enter) var(--ease-out),
+    transform var(--dur-enter) var(--ease-out),
+    overlay var(--dur-enter) allow-discrete,
+    display var(--dur-enter) allow-discrete;
+}
+
+@starting-style {
+  .menu[open] {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+.menu::backdrop {
+  background: transparent;
+}
+
+.menuInner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 0 var(--gutter) var(--space-6);
+}
+
+.menuTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-h);
+}
+
+.menuLinks {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+.menuLinks li {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity var(--dur-enter) var(--ease-out),
+    transform var(--dur-enter) var(--ease-out);
+  transition-delay: calc(var(--i) * 50ms + 60ms);
+}
+
+.menu[open] .menuLinks li {
+  opacity: 1;
+  transform: none;
+}
+
+@starting-style {
+  .menu[open] .menuLinks li {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  font-size: clamp(1.75rem, 8vw, 2.5rem);
+  font-weight: 650;
+  font-stretch: 108%;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.menuFooter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+
+@media (max-width: 1000px) {
+  .link {
+    padding: 0 var(--space-2);
+  }
+}
+
+@media (max-width: 860px) {
+  .nav,
+  .desktopOnly {
+    display: none;
+  }
+
+  .menuButton {
+    display: grid;
+  }
+
+  .actions {
+    gap: var(--space-2);
+  }
+}

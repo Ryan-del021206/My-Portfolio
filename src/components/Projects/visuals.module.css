@@ -1,0 +1,171 @@
+/* Games: one tile per real project, Omikron (the biggest) highlighted */
+.games {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  width: 100%;
+  list-style: none;
+}
+
+.game {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  min-height: 132px;
+  padding: var(--space-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-2);
+  background: var(--page);
+  transition: border-color var(--dur-hover) var(--ease-out);
+}
+
+.game[data-main] {
+  border-color: var(--accent);
+}
+
+@media (hover: hover) {
+  .game:hover {
+    border-color: var(--accent);
+  }
+}
+
+.gameKind {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-stretch: 87.5%;
+}
+
+.gameName {
+  margin-top: var(--space-2);
+  font-size: 1.125rem;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.gameTech {
+  margin-top: auto;
+  padding-top: var(--space-3);
+  color: var(--amber);
+  font-size: var(--text-sm);
+}
+
+/* Portfolio: a real screenshot of this site, its real source code on top */
+.layers {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+}
+
+.pane {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  overflow: hidden;
+  padding: var(--space-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-2);
+  background: var(--page);
+}
+
+.rendered {
+  inset: 0 18% 22% 0;
+}
+
+.source {
+  inset: 34% 0 0 30%;
+  background: var(--surface);
+  box-shadow: var(--shadow-float);
+}
+
+.paneLabel {
+  flex: none;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-stretch: 87.5%;
+}
+
+.shot {
+  display: block;
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  object-fit: cover;
+  object-position: left top;
+  border-radius: var(--radius-1);
+}
+
+.code {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-stretch: 87.5%;
+  line-height: 1.55;
+  white-space: pre;
+}
+
+.codeLine {
+  display: block;
+}
+
+.comment {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.string,
+.number {
+  color: var(--amber);
+}
+
+.keyword {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.tag {
+  color: var(--amber);
+}
+
+.punct {
+  color: var(--muted);
+}
+
+.plain {
+  color: var(--ink-soft);
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .source {
+    transition: translate 600ms var(--ease-out);
+  }
+
+  .layers:hover .source {
+    translate: 4% 6%;
+  }
+}
+
+@media (max-width: 580px) {
+  .games {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .game {
+    min-height: 0;
+  }
+
+  .layers {
+    aspect-ratio: 4 / 3.4;
+  }
+
+  .rendered {
+    inset: 0 0 34% 0;
+  }
+
+  .source {
+    inset: 46% 0 0 10%;
+  }
+}
