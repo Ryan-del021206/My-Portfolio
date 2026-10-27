@@ -141,6 +141,12 @@ export interface Dictionary {
     usedInLabel: string
     notShownYet: string
     detailTitle: (name: string) => string
+    certsHeading: string
+    certsIntro: string
+    certIssuer: string
+    certEarned: string
+    certVerify: string
+    certBadge: string
   }
   process: {
     heading: string

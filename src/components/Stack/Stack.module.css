@@ -8,7 +8,8 @@
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   grid-template-areas:
     'head head'
-    'globe detail';
+    'globe detail'
+    'certs certs';
   gap: var(--space-7) clamp(40px, 6vw, 96px);
   align-items: center;
 }
@@ -289,7 +290,8 @@
     grid-template-areas:
       'head'
       'globe'
-      'detail';
+      'detail'
+      'certs';
   }
 
   .head {
@@ -300,5 +302,96 @@
 @media (min-width: 861px) and (prefers-reduced-motion: reduce) {
   .grid {
     align-items: start;
+  }
+}
+
+/* Certificate badge in the detail panel (only for certified technologies) */
+.certBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  margin-top: var(--space-4);
+  padding: 0 var(--space-4);
+  border: 1px solid rgb(var(--accent-rgb) / 0.45);
+  border-radius: 999px;
+  color: var(--amber);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .certBadge:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+}
+
+/* HackerRank certificates under the globe */
+.certs {
+  grid-area: certs;
+  padding-top: var(--space-7);
+  border-top: 1px solid var(--line);
+}
+
+.certsHeading {
+  font-size: var(--text-h3);
+}
+
+.certsIntro {
+  margin-top: var(--space-2);
+  color: var(--ink-soft);
+}
+
+.certList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+  list-style: none;
+  padding: 0;
+}
+
+.cert {
+  display: grid;
+  align-content: start;
+  gap: var(--space-1);
+  padding: var(--space-5);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-3);
+  background: rgb(17 17 20 / 0.8);
+}
+
+.certIcon {
+  color: var(--accent);
+}
+
+.certName {
+  margin-top: var(--space-2);
+  font-size: 1.0625rem;
+  font-weight: 650;
+}
+
+.certMeta {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.certLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  margin-top: var(--space-2);
+  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .certLink:hover {
+    color: var(--ink);
   }
 }

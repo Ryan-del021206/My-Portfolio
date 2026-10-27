@@ -51,7 +51,7 @@ describe('dictionaries', () => {
       path.startsWith('.projects.games')
     const allowedSame = new Set([
       '.nav.mono', '.hero.facts[2].value', '.terminal.title', '.terminal.output.help[7]', '.projects.names.mono',
-      '.projects.names.omikron',
+      '.projects.names.omikron', '.stack.certIssuer',
       '.nav.stack', '.projects.items.omikron.name', '.projects.items.portfolio.kind', '.projects.fitnessModules[0]',
       '.projects.linksLabel', '.stack.groups.frontend', '.stack.groups.mobile', '.stack.groups.design', '.about.facts[0].label',
       '.about.facts[0].value', '.about.facts[1].value', '.contact.instagramLabel', '.a11y.menuTitle', '.hero.facts[3].label',

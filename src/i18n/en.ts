@@ -273,6 +273,12 @@ export const en: Dictionary = {
     usedInLabel: 'Used in',
     notShownYet: "There's no public project for this here yet – feel free to ask me about it directly.",
     detailTitle: (name) => name,
+    certsHeading: 'Certificates',
+    certsIntro: 'Skill tests passed on HackerRank – each one can be verified there directly.',
+    certIssuer: 'HackerRank',
+    certEarned: 'October 2026',
+    certVerify: 'Verify certificate',
+    certBadge: 'Certified',
   },
   process: {
     heading: 'How I solve problems',

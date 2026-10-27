@@ -275,6 +275,12 @@ export const de: Dictionary = {
     usedInLabel: 'Zu sehen in',
     notShownYet: 'Dafür gibt es hier noch kein öffentliches Projekt – frag mich gern direkt danach.',
     detailTitle: (name) => name,
+    certsHeading: 'Zertifikate',
+    certsIntro: 'Bestandene Skill-Tests bei HackerRank – jedes lässt sich dort direkt überprüfen.',
+    certIssuer: 'HackerRank',
+    certEarned: 'Oktober 2026',
+    certVerify: 'Zertifikat prüfen',
+    certBadge: 'Zertifiziert',
   },
   process: {
     heading: 'Wie ich Probleme löse',
