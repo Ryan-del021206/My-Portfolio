@@ -274,10 +274,11 @@ export const en: Dictionary = {
     notShownYet: "There's no public project for this here yet – feel free to ask me about it directly.",
     detailTitle: (name) => name,
     certsHeading: 'Certificates',
-    certsIntro: 'Skill tests passed on HackerRank – each one can be verified there directly.',
+    certsIntro: 'Skill tests passed on HackerRank in October 2026.',
     certIssuer: 'HackerRank',
     certEarned: 'October 2026',
     certVerify: 'Verify certificate',
+    certAlt: (name) => `HackerRank certificate ${name}, issued to Ryan Quentin Gabriel Ruppert on 27 Oct 2026`,
     certBadge: 'Certified',
   },
   process: {

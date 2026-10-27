@@ -146,6 +146,7 @@ export interface Dictionary {
     certIssuer: string
     certEarned: string
     certVerify: string
+    certAlt: (name: string) => string
     certBadge: string
   }
   process: {

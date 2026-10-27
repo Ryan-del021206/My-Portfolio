@@ -1,6 +1,6 @@
 import { ArrowDownRight, ArrowUpRight, BadgeCheck } from 'lucide-react'
 import { useState } from 'react'
-import { certificateFor, certificates } from '../../content/certificates'
+import { certificateFor, certificateImages } from '../../content/certificates'
 import { projectAnchor } from '../../content/projects'
 import { allTech, groupOf, stack, type Tech } from '../../content/stack'
 import { useI18n } from '../../i18n/useI18n'
@@ -107,18 +107,22 @@ export function Stack() {
           <h3 className={styles.certsHeading}>{t.stack.certsHeading}</h3>
           <p className={styles.certsIntro}>{t.stack.certsIntro}</p>
           <ul className={styles.certList}>
-            {certificates.map((cert) => (
-              <li key={cert.id} className={styles.cert}>
-                <BadgeCheck className={styles.certIcon} size={22} aria-hidden="true" />
-                <strong className={styles.certName}>{cert.name}</strong>
-                <span className={styles.certMeta}>
-                  {t.stack.certIssuer} · {t.stack.certEarned}
-                </span>
-                <a href={cert.url} className={styles.certLink} target="_blank" rel="noopener">
-                  {t.stack.certVerify}
-                  <ArrowUpRight size={16} aria-hidden="true" />
-                  <span className="visually-hidden">: {cert.name}</span>
-                </a>
+            {certificateImages.map((cert) => (
+              <li key={cert.id}>
+                <figure className={styles.cert}>
+                  <img
+                    className={styles.certImage}
+                    src={cert.image}
+                    alt={t.stack.certAlt(cert.name)}
+                    width={1200}
+                    height={914}
+                    decoding="async"
+                  />
+                  <figcaption className={styles.certCaption}>
+                    <BadgeCheck size={16} aria-hidden="true" />
+                    {cert.name} · {t.stack.certIssuer}
+                  </figcaption>
+                </figure>
               </li>
             ))}
           </ul>

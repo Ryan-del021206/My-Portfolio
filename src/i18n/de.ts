@@ -276,10 +276,11 @@ export const de: Dictionary = {
     notShownYet: 'Dafür gibt es hier noch kein öffentliches Projekt – frag mich gern direkt danach.',
     detailTitle: (name) => name,
     certsHeading: 'Zertifikate',
-    certsIntro: 'Bestandene Skill-Tests bei HackerRank – jedes lässt sich dort direkt überprüfen.',
+    certsIntro: 'Bestandene Skill-Tests bei HackerRank, abgelegt im Oktober 2026.',
     certIssuer: 'HackerRank',
     certEarned: 'Oktober 2026',
     certVerify: 'Zertifikat prüfen',
+    certAlt: (name) => `HackerRank-Zertifikat ${name}, ausgestellt für Ryan Quentin Gabriel Ruppert am 27.10.2026`,
     certBadge: 'Zertifiziert',
   },
   process: {

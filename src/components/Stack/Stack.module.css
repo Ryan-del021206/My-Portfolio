@@ -346,52 +346,47 @@
 
 .certList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
-  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: var(--space-5);
   margin-top: var(--space-5);
-  list-style: none;
   padding: 0;
+  list-style: none;
 }
 
 .cert {
-  display: grid;
-  align-content: start;
-  gap: var(--space-1);
-  padding: var(--space-5);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-3);
-  background: rgb(17 17 20 / 0.8);
+  margin: 0;
 }
 
-.certIcon {
-  color: var(--accent);
+/* The certificate itself, like a sheet of paper on the dark page. */
+.certImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-float);
 }
 
-.certName {
-  margin-top: var(--space-2);
-  font-size: 1.0625rem;
-  font-weight: 650;
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .certImage {
+    transition: transform var(--dur-hover) var(--ease-out);
+  }
+
+  .cert:hover .certImage {
+    transform: translateY(-4px);
+  }
 }
 
-.certMeta {
-  color: var(--muted);
-  font-size: var(--text-sm);
-}
-
-.certLink {
-  display: inline-flex;
+.certCaption {
+  display: flex;
   align-items: center;
-  gap: var(--space-1);
-  min-height: 44px;
-  margin-top: var(--space-2);
-  color: var(--accent);
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  color: var(--ink-soft);
   font-size: var(--text-sm);
   font-weight: 600;
-  text-decoration: none;
 }
 
-@media (hover: hover) {
-  .certLink:hover {
-    color: var(--ink);
-  }
+.certCaption svg {
+  flex: none;
+  color: var(--accent);
 }
